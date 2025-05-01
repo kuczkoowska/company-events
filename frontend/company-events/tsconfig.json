@@ -1,0 +1,123 @@
+/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
+/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
+
+
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@poke-ang/*": [
+        "app/*"
+      ],
+      "@poke-ang/animations/*": [
+        "app/animations/*"
+      ],
+      "@poke-ang/core/*": [
+        "app/core/*"
+      ],
+      "@poke-ang/const/*": [
+        "app/const/*"
+      ],
+      "@poke-ang/directives/*": [
+        "app/directives/*"
+      ],
+      "@poke-ang/guards/*": [
+        "app/guards/*"
+      ],
+      "@poke-ang/shell/*": [
+        "app/shell/*"
+      ],
+      "@poke-ang/interceptors/*": [
+        "app/interceptors/*"
+      ],
+      "@poke-ang/locales/*": [
+        "app/locales/*"
+      ],
+      "@poke-ang/models/*": [
+        "app/models/*"
+      ],
+      "@poke-ang/pipes/*": [
+        "app/pipes/*"
+      ],
+      "@poke-ang/providers/*": [
+        "app/providers/*"
+      ],
+      "@poke-ang/resolvers/*": [
+        "app/resolvers/*"
+      ],
+      "@poke-ang/services/*": [
+        "app/services/*"
+      ],
+      "@poke-ang/stores/*": [
+        "app/stores/*"
+      ],
+      "@poke-ang/ui/*": [
+        "app/ui/*"
+      ],
+      "@poke-ang/ui/atoms/*": [
+        "app/ui/atoms/*"
+      ],
+      "@poke-ang/ui/molecules/*": [
+        "app/ui/molecules/*"
+      ],
+      "@poke-ang/ui/organisms/*": [
+        "app/ui/organisms/*"
+      ],
+      "@poke-ang/utils/*": [
+        "app/utils/*"
+      ],
+      "@poke-ang/modals/*": [
+        "app/modals/*"
+      ],
+      "@poke-ang/assets/*": [
+        "app/assets/*"
+      ],
+      "@poke-ang/env/*": [
+        "environments/*"
+      ]
+    },
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "module": "ES2022",
+    "lib": [
+      "ES2022",
+      "dom"
+    ],
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "listEmittedFiles": true,
+    "strictNullChecks": false,
+    "strictPropertyInitialization": false,
+    "diagnostics": true,
+    "extendedDiagnostics": true,
+    "removeComments": true,
+    "useDefineForClassFields": false,
+    "skipLibCheck": true
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  },
+  "exclude": [
+    "server.ts"
+  ]
+}
