@@ -1,0 +1,46 @@
+<button class="bg-purple-500 text-white px-4 py-2 rounded hover:bg-purple-600 transition-colors duration-300" (click)=open()>
+  See Details
+</button>
+
+@if (visible()) {
+
+  <div class="bg-black/50 z-100 fixed flex justify-center items-center h-screen w-screen top-0 left-0">
+    <div class="bg-stone-200 flex justify-center items-start flex-col w-1/2 h-min-1/2 h-max-fit-content rounded-lg p-8 shadow-lg relative">
+        <ul class="flex justify-start flex-col items-start gap-4">
+          <li>
+            <h1 class="text-2xl font-bold self-center">Event Details</h1>
+          </li>
+          <li>
+            <h2 class="text-xl font-semibold mb-8">{{ event().name }}</h2>
+          </li>
+          <li>
+            <p class="text-gray-700">{{ event().description }}</p>
+          </li>
+          <li>
+            <p class="text-gray-700">Date: {{ event().date }}</p>
+          </li>
+          <li>
+            <p class="text-gray-700">Location: {{ event().location }}</p>
+          </li>
+          <li>
+            <p class="text-gray-700">Organizer: {{ event().organizer }}</p>
+          </li>
+          <li>
+            <p class="text-gray-700">Attendees: {{ event().participants.length }}</p>
+          </li>
+        </ul>
+      <div class="absolute right-4 bottom-4 flex gap-4">
+        <button class="bg-purple-400 text-white px-4 py-2 rounded hover:bg-purple-500 transition-colors duration-300">
+          Sign Up
+        </button>
+        <button class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors duration-300" (click)=close()>
+          Close
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+
+
+}

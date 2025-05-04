@@ -1,0 +1,64 @@
+<div
+  class="h-64 w-64 text-white flex items-center justify-center rounded-lg shadow-lg transition-transform duration-300 transform hover:scale-105 hover:cursor-pointer"
+  [class]="isRoomFree(room) ? 'bg-green-500' : 'bg-red-500'"
+  (mouseover)="open()" (mouseleave)="close()" (click)="onClick()">
+  {{ room.name }}
+</div>
+
+@if (visible()) {
+  <div class="absolute w-48 bg-gray-800 text-white text-sm rounded-lg shadow-lg p-4 z-20">
+    <div class="flex flex-col items-center">
+      @if (getCurrentEvent(room)) {
+        <p class="font-semibold">
+          {{ getCurrentEvent(room)?.eventStart }} - {{ getCurrentEvent(room)?.eventEnd }}
+        </p>
+      } @else {
+        <p class="font-semibold">No ongoing events</p>
+      }
+    </div>
+  </div>
+}
+
+@if (clicked()) {
+  <div class="fixed right-0 top-0 h-full w-80 bg-gray-800 text-white shadow-lg p-6 z-30 overflow-y-auto">
+    <h1 class="text-2xl font-bold text-center text-white mb-6">Room Details</h1>
+    <ul class="list-none space-y-6 mb-6">
+      <li>Room Name: {{ room.name }}</li>
+      <li>Room Status: {{ isRoomFree(room) ? 'Available' : 'Occupied' }}</li>
+
+      @if (getTodayEvents(room).length > 0) {
+        <li>
+          @if (getCurrentOngoingEvent(room)) {
+            <h2 class="font-semibold mb-3">Current Event:</h2>
+            <div class="bg-purple-700 p-3 rounded mb-6">
+              <p class="font-bold">{{ getCurrentOngoingEvent(room)?.name }}</p>
+              <p>{{ getCurrentOngoingEvent(room)?.eventStart }} - {{ getCurrentOngoingEvent(room)?.eventEnd }}</p>
+              <p class="text-sm text-gray-300">(In Progress)</p>
+            </div>
+          }
+
+          @if (getUpcomingEvents(room).length > 0) {
+            <h2 class="font-semibold mb-3">Upcoming Events:</h2>
+            <div class="space-y-3">
+              @for (event of getUpcomingEvents(room); track event) {
+                <div class="bg-gray-700 p-3 rounded">
+                  <p class="font-bold">{{ event.name }}</p>
+                  <p>{{ event.eventStart }} - {{ event.eventEnd }}</p>
+                  <p class="text-sm text-gray-300">(Upcoming)</p>
+                </div>
+              }
+            </div>
+          }
+        </li>
+      } @else {
+        <li>No events scheduled for today</li>
+      }
+    </ul>
+
+    <button
+      class="w-full bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition-colors duration-300"
+      (click)="onCancel()">
+      Close
+    </button>
+  </div>
+}
