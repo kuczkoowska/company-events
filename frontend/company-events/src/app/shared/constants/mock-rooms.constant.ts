@@ -9,7 +9,7 @@ export const MOCK_ROOMS: IRoom[] = [
       {
         id: 101,
         name: 'Team Meeting',
-        date: new Date('2025-05-04'),
+        date: new Date('2025-05-16'),
         eventStart: '10:00',
         eventEnd: '11:00',
         location: 'Conference Room A',
@@ -20,7 +20,7 @@ export const MOCK_ROOMS: IRoom[] = [
       {
         id: 102,
         name: 'Project Kickoff',
-        date: new Date('2025-05-04'),
+        date: new Date('2025-05-16'),
         eventStart: '14:00',
         eventEnd: '20:30',
         location: 'Conference Room A',

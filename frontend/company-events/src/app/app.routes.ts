@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     { 
@@ -7,12 +8,18 @@ export const routes: Routes = [
         children: [
             {
                 path: 'events',
+                canActivate: [AuthGuard], // Protected route
                 loadChildren: () => import('@company/core/events-view/events.routing').then(m => m.default)
             },
             {
                 path: '',
+                canActivate: [AuthGuard], // Protected route
                 loadChildren: () => import('@company/core/home-view/home.routing')
             },
+            {
+                path: 'about',
+                loadChildren: () => import('@company/core/about-view/about.routing') // Public route
+            }
         ]
     },
     {
@@ -21,6 +28,6 @@ export const routes: Routes = [
     },
     {
         path: '**',
-        redirectTo: '/'
+        redirectTo: '/about'
     },
 ];

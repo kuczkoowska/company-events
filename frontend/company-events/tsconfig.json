@@ -7,73 +7,73 @@
   "compilerOptions": {
     "baseUrl": "src",
     "paths": {
-      "@poke-ang/*": [
+      "@company/*": [
         "app/*"
       ],
-      "@poke-ang/animations/*": [
+      "@company/animations/*": [
         "app/animations/*"
       ],
-      "@poke-ang/core/*": [
+      "@company/core/*": [
         "app/core/*"
       ],
-      "@poke-ang/const/*": [
+      "@company/const/*": [
         "app/const/*"
       ],
-      "@poke-ang/directives/*": [
+      "@company/directives/*": [
         "app/directives/*"
       ],
-      "@poke-ang/guards/*": [
+      "@company/guards/*": [
         "app/guards/*"
       ],
-      "@poke-ang/shell/*": [
+      "@company/shell/*": [
         "app/shell/*"
       ],
-      "@poke-ang/interceptors/*": [
+      "@company/interceptors/*": [
         "app/interceptors/*"
       ],
-      "@poke-ang/locales/*": [
+      "@company/locales/*": [
         "app/locales/*"
       ],
-      "@poke-ang/models/*": [
+      "@company/models/*": [
         "app/models/*"
       ],
-      "@poke-ang/pipes/*": [
+      "@company/pipes/*": [
         "app/pipes/*"
       ],
-      "@poke-ang/providers/*": [
+      "@company/providers/*": [
         "app/providers/*"
       ],
-      "@poke-ang/resolvers/*": [
+      "@company/resolvers/*": [
         "app/resolvers/*"
       ],
-      "@poke-ang/services/*": [
+      "@company/services/*": [
         "app/services/*"
       ],
-      "@poke-ang/stores/*": [
+      "@company/stores/*": [
         "app/stores/*"
       ],
-      "@poke-ang/ui/*": [
+      "@company/ui/*": [
         "app/ui/*"
       ],
-      "@poke-ang/ui/atoms/*": [
+      "@company/ui/atoms/*": [
         "app/ui/atoms/*"
       ],
-      "@poke-ang/ui/molecules/*": [
+      "@company/ui/molecules/*": [
         "app/ui/molecules/*"
       ],
-      "@poke-ang/ui/organisms/*": [
+      "@company/ui/organisms/*": [
         "app/ui/organisms/*"
       ],
-      "@poke-ang/utils/*": [
+      "@company/utils/*": [
         "app/utils/*"
       ],
-      "@poke-ang/modals/*": [
+      "@company/modals/*": [
         "app/modals/*"
       ],
-      "@poke-ang/assets/*": [
+      "@company/assets/*": [
         "app/assets/*"
       ],
-      "@poke-ang/env/*": [
+      "@company/env/*": [
         "environments/*"
       ]
     },
@@ -88,7 +88,7 @@
     "sourceMap": true,
     "declaration": false,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",

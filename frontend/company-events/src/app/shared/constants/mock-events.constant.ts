@@ -4,7 +4,7 @@ export const MOCK_EVENTS: IEvent[] = [
   {
     id: 1,
     name: 'Company Anniversary',
-    date: new Date('2025-06-04'),
+    date: new Date('2025-16-04'),
     eventStart: '10:00',
     eventEnd: '12:00',
     location: 'Main Office',
@@ -15,7 +15,7 @@ export const MOCK_EVENTS: IEvent[] = [
   {
     id: 2,
     name: 'Team Building Workshop',
-    date: new Date('2025-05-04'),
+    date: new Date('2025-16-04'),
     eventStart: '09:00',
     eventEnd: '12:00',
     location: 'Conference Center',
