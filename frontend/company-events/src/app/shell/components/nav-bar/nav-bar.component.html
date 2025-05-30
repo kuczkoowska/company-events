@@ -4,27 +4,26 @@
       <div class="flex items-center space-x-6">
         <div class="text-white font-bold text-xl">Company Events</div>
         <a routerLink="/about" class="text-gray-300 hover:text-white transition duration-200">About</a>
-  
+
         <!-- Items visible only to authenticated users -->
-        @if (isLoggedIn()){
+        @if (authenticated){
           <a routerLink="/home" class="text-gray-300 hover:text-white transition duration-200">Events</a>
           <a routerLink="/rooms" class="text-gray-300 hover:text-white transition duration-200">Rooms</a>
           <a routerLink="/profile" class="text-gray-300 hover:text-white transition duration-200">Profile</a>
         }
-        
+
         <!-- Admin-only items -->
         @if (isAdmin()){
           <a routerLink="/admin" class="text-gray-300 hover:text-white transition duration-200">Admin Panel</a>
         }
       </div>
-  
+
       <!-- Authentication buttons -->
       <div class="flex items-center space-x-4">
-        @if (!isLoggedIn()){
+        @if (!authenticated){
           <button (click)="login()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-200">Login</button>
         }
-        @if (isLoggedIn()){
-          <span class="text-gray-300">{{ username }}</span>
+        @if (authenticated){
           <button (click)="logout()" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md transition duration-200">Logout</button>
         }
       </div>

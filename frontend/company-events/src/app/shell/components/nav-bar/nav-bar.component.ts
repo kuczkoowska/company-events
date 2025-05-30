@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { KEYCLOAK_EVENT_SIGNAL, KeycloakEventType, KeycloakService, ReadyArgs, typeEventArgs } from 'keycloak-angular';
+import { KEYCLOAK_EVENT_SIGNAL, KeycloakEventType, ReadyArgs, typeEventArgs } from 'keycloak-angular';
+import Keycloak from 'keycloak-js';
 
 @Component({
   selector: 'app-nav-bar',
@@ -11,8 +12,8 @@ import { KEYCLOAK_EVENT_SIGNAL, KeycloakEventType, KeycloakService, ReadyArgs, t
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavBarComponent {
-  authenticated = false;
-  keycloakService = inject(KeycloakService);
+  public authenticated = false;
+  private readonly keycloak = inject(Keycloak);
 
   constructor() {
     const keycloakSignal = inject(KEYCLOAK_EVENT_SIGNAL);
@@ -30,23 +31,16 @@ export class NavBarComponent {
     })
   }
 
-  isLoggedIn(): boolean {
-    return this.authenticated;
-  }
 
   isAdmin(): boolean {
-    return this.keycloakService.isLoggedIn() && this.keycloakService.getKeycloakInstance().hasRealmRole('admin')
-  }
+    return this.keycloak.authenticated && this.keycloak.hasRealmRole('admin')
+  } // przez pipe przekazywac role do komponentu
 
   login(): void {
-    this.keycloakService.login();
+    this.keycloak.login();
   }
 
   logout(): void {
-    this.keycloakService.logout();
+    this.keycloak.logout();
   }
-  get username(): string {
-    return this.keycloakService.getUsername() || '';
-  }
-
  }
