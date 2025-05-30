@@ -1,6 +1,8 @@
 export const keycloakConfig = {
-    // url: 'http://192.168.49.2:30080',
-    url: 'http://localhost:8080',
-    realm: 'events-realm',
-    clientId: 'angular-client'
-  };
+  url: 'http://localhost:8080',
+  realm: 'events-realm',
+  clientId: 'angular-client',
+  silentCheckSsoRedirectUri: window.location.origin + '/assets/silent-check-sso.html',
+  checkLoginIframe: true,
+  checkLoginIframeInterval: 25
+};
