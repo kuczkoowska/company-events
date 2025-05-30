@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { AuthGuard } from './guards/auth.guard';
+import { canActivateAuthRole } from './guards/auth-role.guard';
 
 export const routes: Routes = [
     { 
@@ -8,12 +8,14 @@ export const routes: Routes = [
         children: [
             {
                 path: 'events',
-                canActivate: [AuthGuard], // Protected route
+                canActivate: [canActivateAuthRole],
+                data: { role: ['admin', 'user'] }, // Protected route
                 loadChildren: () => import('@company/core/events-view/events.routing').then(m => m.default)
             },
             {
                 path: '',
-                canActivate: [AuthGuard], // Protected route
+                canActivate: [canActivateAuthRole],
+                data: { role: ['admin', 'user'] }, // Protected route
                 loadChildren: () => import('@company/core/home-view/home.routing')
             },
             {
@@ -24,6 +26,8 @@ export const routes: Routes = [
     },
     {
         path: 'admin',
+        canActivate: [canActivateAuthRole],
+        data: { role: ['admin'] },
         loadChildren: () => import('@company/core/admin-view/admin.routing')
     },
     {

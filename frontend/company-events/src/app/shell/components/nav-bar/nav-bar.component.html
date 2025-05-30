@@ -1,42 +1,32 @@
-<nav class="fixed top-0 left-0 w-full z-10">
-    <ul class="bg-gray-800 text-white flex justify-around p-4">
-        <li><a routerLink="">Home</a></li>
-        <li><a routerLink="/events">Events</a></li>
-        <li><a routerLink="/about">About</a></li>
-        <li><a routerLink="/contact">Contact</a></li>
-    </ul>
-</nav>
-<!-- <nav class="fixed top-0 left-0 w-full z-10">
-    <ul class="bg-gray-800 text-white flex justify-around items-center p-4">
-        <li><a routerLink="">Home</a></li>
-        <li><a routerLink="/events">Events</a></li>
-        <li><a routerLink="/about">About</a></li>
-        <li><a routerLink="/contact">Contact</a></li>
+<nav class="bg-slate-800 shadow-md">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <!-- Logo and always visible navigation items -->
+      <div class="flex items-center space-x-6">
+        <div class="text-white font-bold text-xl">Company Events</div>
+        <a routerLink="/about" class="text-gray-300 hover:text-white transition duration-200">About</a>
+  
+        <!-- Items visible only to authenticated users -->
+        @if (isLoggedIn()){
+          <a routerLink="/home" class="text-gray-300 hover:text-white transition duration-200">Events</a>
+          <a routerLink="/rooms" class="text-gray-300 hover:text-white transition duration-200">Rooms</a>
+          <a routerLink="/profile" class="text-gray-300 hover:text-white transition duration-200">Profile</a>
+        }
         
-        <li class="flex items-center">
-            <ng-container *ngIf="isLoggedIn(); else loginButton">
-                <div class="flex items-center gap-4">
-                    <img [src]="userProfile?.profilePicture" 
-                         alt="Profile picture" 
-                         class="w-8 h-8 rounded-full"
-                         *ngIf="userProfile?.profilePicture">
-                    <button *ngIf="isAdmin()" 
-                            routerLink="/admin" 
-                            class="bg-red-600 px-4 py-2 rounded">
-                        Admin Panel
-                    </button>
-                    <button (click)="logout()" 
-                            class="bg-gray-600 px-4 py-2 rounded">
-                        Logout
-                    </button>
-                </div>
-            </ng-container>
-            <ng-template #loginButton>
-                <button (click)="login()" 
-                        class="bg-blue-600 px-4 py-2 rounded">
-                    Login
-                </button>
-            </ng-template>
-        </li>
-    </ul>
-</nav> -->
+        <!-- Admin-only items -->
+        @if (isAdmin()){
+          <a routerLink="/admin" class="text-gray-300 hover:text-white transition duration-200">Admin Panel</a>
+        }
+      </div>
+  
+      <!-- Authentication buttons -->
+      <div class="flex items-center space-x-4">
+        @if (!isLoggedIn()){
+          <button (click)="login()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-200">Login</button>
+        }
+        @if (isLoggedIn()){
+          <span class="text-gray-300">{{ username }}</span>
+          <button (click)="logout()" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md transition duration-200">Logout</button>
+        }
+      </div>
+    </div>
+  </nav>
