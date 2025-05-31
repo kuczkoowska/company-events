@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import {In, LessThanOrEqual, MoreThan, Repository} from 'typeorm';
-import { Event } from '../../entities/event.entity';
+import { Event } from './entities/event.entity';
 import { CreateEventDto } from './create-event.dto';
 
 @Injectable()

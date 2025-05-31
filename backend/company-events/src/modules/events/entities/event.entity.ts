@@ -23,7 +23,7 @@ export class Event {
     @Column()
     organizer: string;
 
-    @Column()
+    @Column("text", { array: true })
     participants: string[];
 
     @Column()

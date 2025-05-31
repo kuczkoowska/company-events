@@ -1,13 +1,17 @@
 import { Controller, Get, Param, Post, Body } from '@nestjs/common';
 import { EventsService } from "./events.service";
-import { Event } from "../../entities/event.entity";
+import { Event } from "./entities/event.entity";
 import { CreateEventDto } from "./create-event.dto";
+import {Roles} from "nest-keycloak-connect";
+
 
 @Controller('events')
 export class EventsController {
     constructor(private readonly eventsService: EventsService) {}
 
+
     @Get()
+    @Roles({ roles: ['admin', 'user'] })
     async findAll(): Promise<Event[]> {
         return this.eventsService.findAllEvents();
     }
