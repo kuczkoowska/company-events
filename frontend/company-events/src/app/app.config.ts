@@ -12,7 +12,8 @@ export const provideKeycloakAngular = () =>
     },
     initOptions: {
       onLoad: 'check-sso',
-      silentCheckSsoRedirectUri: window.location.origin + '/public/silent-check-sso.html'
+      checkLoginIframe: false,
+      // silentCheckSsoRedirectUri: window.location.origin + '/public/silent-check-sso.html?v='+ new Date().getTime(),
     },
     features: [
       withAutoRefreshToken({
@@ -25,8 +26,8 @@ export const provideKeycloakAngular = () =>
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideKeycloakAngular(), 
-    provideZoneChangeDetection({ eventCoalescing: true }), 
+    provideKeycloakAngular(),
+    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     KeycloakService // Explicitly provide KeycloakService
   ]
