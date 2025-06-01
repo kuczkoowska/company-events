@@ -1,33 +1,35 @@
 <div class="container mx-auto px-4 py-8">
     <h1 class="text-4xl font-bold text-center text-black my-12">Event List</h1>
     <ul class="max-w-4xl mx-auto space-y-6">
+      @if (eventsResource) {
         @for (event of events; track event) {
-            <li>
+          <li>
             <div class="bg-gradient-to-r from-pink-300 to-purple-300 shadow-lg rounded-lg p-6 hover:shadow-xl transition-shadow duration-300">
-                <h2 class="text-2xl font-semibold text-gray-800 mb-4">{{ event.name }}</h2>
-                <div class="space-y-2">
+              <h2 class="text-2xl font-semibold text-gray-800 mb-4">{{ event.name }}</h2>
+              <div class="space-y-2">
                 <p class="text-gray-600 flex items-center">
-                    <span class="material-icons mr-2">Date:</span>
-                    <span class="font-medium text-gray-700">{{ event.date | date:'EEEE, MMMM d, y' }}</span>
+                  <span class="material-icons mr-2">Date:</span>
+                  <span class="font-medium text-gray-700">{{ event.date | date:'EEEE, MMMM d, y' }}</span>
                 </p>
                 <p class="text-gray-600 flex items-center">
-                    <span class="material-icons mr-2">Time:</span>
-                    {{ event.eventStart }} - {{ event.eventEnd }}
+                  <span class="material-icons mr-2">Time:</span>
+                  {{ event.eventStart }} - {{ event.eventEnd }}
                 </p>
                 <p class="text-gray-600 flex items-center">
-                    <span class="material-icons mr-2">Location:</span>
-                    {{ event.location }}
+                  <span class="material-icons mr-2">Location:</span>
+                  {{ event.location }}
                 </p>
                 <p class="text-gray-600 flex items-center">
-                    <span class="material-icons mr-2">Organizer:</span>
-                    {{ event.organizer }}
+                  <span class="material-icons mr-2">Organizer:</span>
+                  {{ event.organizer }}
                 </p>
-                </div>
-                <div class="mt-4 text-center flex justify-end">
-                  <app-event-details [event]="event"/>
-                </div>
+              </div>
+              <div class="mt-4 text-center flex justify-end">
+                <app-event-details [event]="event"></app-event-details>
+              </div>
             </div>
-            </li>
+          </li>
         }
+      }
     </ul>
 </div>
