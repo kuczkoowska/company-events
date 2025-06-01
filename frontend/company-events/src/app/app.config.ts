@@ -2,6 +2,7 @@ import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideKeycloak, withAutoRefreshToken, AutoRefreshTokenService, UserActivityService, KeycloakService } from 'keycloak-angular';
+import {provideHttpClient, withFetch} from '@angular/common/http';
 
 export const provideKeycloakAngular = () =>
   provideKeycloak({
@@ -29,6 +30,7 @@ export const appConfig: ApplicationConfig = {
     provideKeycloakAngular(),
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
+    provideHttpClient(withFetch()),
     KeycloakService // Explicitly provide KeycloakService
   ]
 };
