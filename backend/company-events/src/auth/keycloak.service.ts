@@ -8,7 +8,8 @@ import { APP_GUARD } from '@nestjs/core';
             authServerUrl: 'http://localhost:8080',
             realm: 'events-realm',
             clientId: 'company-events-backend',
-            secret: 'secret',
+            secret: 'zAYkiN3c8H7RITeJeoGdUDjRv498xhyb',
+
         }),
     ],
     providers: [

@@ -8,23 +8,24 @@ const isAccessAllowed = async (
   authData: AuthGuardData
 ): Promise<boolean | UrlTree> => {
   const { authenticated, grantedRoles } = authData;
+  const router = inject(Router);
+
+  if (!authenticated) {
+    return router.parseUrl('/about');
+  }
 
   const requiredRoles: string[] = route.data['role'];
-  console.log('requiredRoles', requiredRoles);
-  console.log('grantedRoles', grantedRoles);
+
   if (!requiredRoles || requiredRoles.length === 0) {
-    return false;
+    return true; // Allow access if no roles are required
   }
 
-  const hasRequiredRole = requiredRoles.some(role => grantedRoles.realmRoles.includes(role));
+  // Check if user has any of the required roles
+  const hasRequiredRole = requiredRoles.some(role =>
+    grantedRoles.realmRoles?.includes(role)
+  );
 
-
-  if (authenticated && hasRequiredRole) {
-    return true;
-  }
-
-  const router = inject(Router);
-  return router.parseUrl('/forbidden');
+  return hasRequiredRole ? true : router.parseUrl('/forbidden');
 };
 
 export const canActivateAuthRole = createAuthGuard<CanActivateFn>(isAccessAllowed);

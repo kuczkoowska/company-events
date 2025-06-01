@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, effect, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import {HasRolesDirective, KEYCLOAK_EVENT_SIGNAL, KeycloakEventType, ReadyArgs, typeEventArgs} from 'keycloak-angular';
+import {KEYCLOAK_EVENT_SIGNAL, KeycloakEventType, ReadyArgs, typeEventArgs} from 'keycloak-angular';
 import Keycloak from 'keycloak-js';
 
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
-  imports: [RouterModule, HasRolesDirective],
+  imports: [RouterModule],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

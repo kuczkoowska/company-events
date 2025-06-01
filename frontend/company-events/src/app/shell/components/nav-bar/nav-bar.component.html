@@ -1,31 +1,31 @@
-<nav class="bg-slate-800 shadow-md">
-    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
-      <!-- Logo and always visible navigation items -->
-      <div class="flex items-center space-x-6">
-        <div class="text-white font-bold text-xl">Company Events</div>
-        <a routerLink="/about" class="text-gray-300 hover:text-white transition duration-200">About</a>
+<nav class="bg-gradient-to-r from-pink-500 to-purple-600 shadow-xl">
+  <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <!-- Logo and always visible navigation items -->
+    <div class="flex items-center space-x-8">
+      <div class="text-white font-extrabold text-3xl">Company Events</div>
+      <a routerLink="/about" class="text-white hover:text-yellow-200 transition duration-300 text-lg">About</a>
 
-        <!-- Items visible only to authenticated users -->
-        @if (authenticated){
-          <a routerLink="/events" class="text-gray-300 hover:text-white transition duration-200">Events</a>
-          <a routerLink="/" class="text-gray-300 hover:text-white transition duration-200">Rooms</a>
-          <a routerLink="/profile" class="text-gray-300 hover:text-white transition duration-200">Profile</a>
-        }
+      <!-- Items visible only to authenticated users -->
+      @if (authenticated){
+        <a routerLink="/events" class="text-white text-lg">Events</a>
+        <a routerLink="/rooms" class="text-white text-lg">Rooms</a>
+        <a routerLink="/profile" class="text-white text-lg">Profile</a>
+      }
 
-        <!-- Admin-only items -->
-        @if (isAdmin()){
-          <a routerLink="/admin" class="text-gray-300 hover:text-white transition duration-200">Admin Panel</a>
-        }
-      </div>
-
-      <!-- Authentication buttons -->
-      <div class="flex items-center space-x-4">
-        @if (!authenticated){
-          <button (click)="login()" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition duration-200">Login</button>
-        }
-        @if (authenticated){
-          <button (click)="logout()" class="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-md transition duration-200">Logout</button>
-        }
-      </div>
+      <!-- Admin-only items -->
+      @if (isAdmin()){
+        <a routerLink="/admin" class="text-white text-lg">Admin Panel</a>
+      }
     </div>
-  </nav>
+
+    <!-- Authentication buttons -->
+    <div class="flex items-center space-x-6">
+      @if (!authenticated){
+        <button (click)="login()" class="bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-full transition duration-300 text-lg shadow-md">Login</button>
+      }
+      @if (authenticated){
+        <button (click)="logout()" class="bg-fuchsia-600 hover:bg-fuchsia-700 text-white px-6 py-3 rounded-full transition duration-300 text-lg shadow-md">Logout</button>
+      }
+    </div>
+  </div>
+</nav>

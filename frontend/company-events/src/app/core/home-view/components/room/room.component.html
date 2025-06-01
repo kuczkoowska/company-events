@@ -1,6 +1,6 @@
 <div
   class="h-64 w-64 text-white flex items-center justify-center rounded-lg shadow-lg transition-transform duration-300 transform hover:scale-105 hover:cursor-pointer"
-  [class]="isRoomFree(room) ? 'bg-green-500' : 'bg-red-500'"
+  [class]="isRoomFree(room) ? 'bg-blue-500' : 'bg-red-500'"
   (mouseover)="open()" (mouseleave)="close()" (click)="onClick()">
   {{ room.name }}
 </div>
