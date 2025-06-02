@@ -35,4 +35,17 @@ export class RoomsService {
     async delete(id: number): Promise<void> {
         await this.roomRepository.delete(id);
     }
+
+    async getRoomEvents(roomId: number): Promise<Room> {
+        const room = await this.roomRepository.findOne({
+            where: { id: roomId },
+            relations: ['events']
+        });
+
+        if (!room) {
+            throw new Error(`Room with ID ${roomId} not found`);
+        }
+
+        return room;
+    }
 }

@@ -3,16 +3,31 @@ import { InjectRepository } from '@nestjs/typeorm';
 import {In, LessThanOrEqual, MoreThan, Repository} from 'typeorm';
 import { Event } from './entities/event.entity';
 import { CreateEventDto } from './create-event.dto';
+import { Room } from '../rooms/entities/room.entity';
 
 @Injectable()
 export class EventsService {
     constructor(
         @InjectRepository(Event)
-        private eventRepository: Repository<Event>
+        private eventRepository: Repository<Event>,
+    @InjectRepository(Room)
+    private roomRepository: Repository<Room>
     ) {}
 
-    async createEvent(createEventDto: CreateEventDto): Promise<Event> {
-        const event = this.eventRepository.create(createEventDto);
+
+    async createEvent(createEventDto: CreateEventDto, userId: string): Promise<Event> {
+        const room = await this.roomRepository.findOne({ where: { id: createEventDto.roomId }});
+        if (!room) {
+            throw new Error('Room not found');
+        }
+
+        const event: Event = this.eventRepository.create({
+            ...createEventDto,
+            organizerId: userId,
+            participants: [],
+            location: room
+        });
+
         return await this.eventRepository.save(event);
     }
 

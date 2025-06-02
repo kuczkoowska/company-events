@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn} from 'typeorm';
+import {Room} from "../../rooms/entities/room.entity";
 
 @Entity('events')
 export class Event {
@@ -17,11 +18,12 @@ export class Event {
     @Column({ type: 'time' })
     eventEnd: string;
 
-    @Column()
-    location: string;
+    @ManyToOne(() => Room, room => room.events, { eager: true })
+    @JoinColumn({ name: 'roomId' })
+    location: Room;
 
     @Column()
-    organizer: string;
+    organizerId: string;
 
     @Column("text", { array: true })
     participants: string[];

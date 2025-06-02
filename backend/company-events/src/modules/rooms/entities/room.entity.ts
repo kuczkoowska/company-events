@@ -1,4 +1,5 @@
-import {Column, Entity, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Event} from "../../events/entities/event.entity";
 
 @Entity('rooms')
 export class Room {
@@ -16,4 +17,7 @@ export class Room {
 
     @Column({ default: true })
     isAvailable?: boolean;
+
+    @OneToMany(() => Event, event => event.location)
+    events: Event[];
 }

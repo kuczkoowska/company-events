@@ -1,8 +1,9 @@
-import { Controller, Get, Param, Post, Body } from '@nestjs/common';
+import {Controller, Get, Param, Post, Body, UseGuards, Req} from '@nestjs/common';
 import { EventsService } from "./events.service";
 import { Event } from "./entities/event.entity";
 import { CreateEventDto } from "./create-event.dto";
 import {Roles} from "nest-keycloak-connect";
+import { KeycloakAuthGuard } from "../../auth/keycloak-auth.guard";
 
 
 @Controller('events')
@@ -46,7 +47,12 @@ export class EventsController {
     }
 
     @Post()
-    async create(@Body() createEventDto: CreateEventDto): Promise<Event> {
-        return this.eventsService.createEvent(createEventDto);
+    @UseGuards(KeycloakAuthGuard)
+    async createEvent(
+        @Body() createEventDto: CreateEventDto,
+        @Req() req: any
+    ) {
+        const userId = req.user.sub; // Keycloak user ID from the JWT token
+        return this.eventsService.createEvent(createEventDto, userId);
     }
 }

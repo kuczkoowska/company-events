@@ -22,7 +22,7 @@ console.log('ENV:', process.env);
       password: process.env.DB_PASSWORD,
       database: process.env.DB_NAME,
       entities: [Event, Room],
-      synchronize: false,
+      synchronize: true,
       logging: true,
       extra: {
         hostAddress: process.env.DB_HOST // Force IPv4

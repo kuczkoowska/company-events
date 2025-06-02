@@ -43,4 +43,13 @@ export class RoomsController {
     delete(@Param('id') id: number): Promise<void> {
         return this.roomsService.delete(id);
     }
+
+    @Get(':id/events')
+    async getRoomEvents(@Param('id') id: number): Promise<Room> {
+        const room = await this.roomsService.getRoomEvents(id);
+        if (!room) {
+            throw new Error(`Room with ID ${id} not found`);
+        }
+        return room;
+    }
 }
