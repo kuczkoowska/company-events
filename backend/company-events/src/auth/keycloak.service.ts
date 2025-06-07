@@ -1,15 +1,14 @@
-import { Module } from '@nestjs/common';
-import { KeycloakConnectModule, ResourceGuard, RoleGuard, AuthGuard } from 'nest-keycloak-connect';
-import { APP_GUARD } from '@nestjs/core';
+import {Module} from '@nestjs/common';
+import {AuthGuard, KeycloakConnectModule, ResourceGuard, RoleGuard} from 'nest-keycloak-connect';
+import {APP_GUARD} from '@nestjs/core';
 
 @Module({
     imports: [
         KeycloakConnectModule.register({
-            authServerUrl: 'http://localhost:8080',
+            authServerUrl: 'http://keycloak:8080',
             realm: 'events-realm',
             clientId: 'company-events-backend',
-            secret: 'zAYkiN3c8H7RITeJeoGdUDjRv498xhyb',
-
+            secret: 'AvmM7M1OGt9WSsNLi135tigRvihwyWVx',
         }),
     ],
     providers: [
@@ -28,4 +27,5 @@ import { APP_GUARD } from '@nestjs/core';
         },
     ],
 })
-export class KeycloakModule {}
+export class KeycloakModule {
+}

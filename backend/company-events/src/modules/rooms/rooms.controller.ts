@@ -9,13 +9,13 @@ export class RoomsController {
     constructor(private readonly roomsService: RoomsService) {}
 
     @Get()
-    @Roles({ roles: ['admin', 'user'] })
+    // @Roles({ roles: ['admin', 'user'] })
     findAll(): Promise<Room[]> {
         return this.roomsService.findAll();
     }
 
     @Post()
-    @Roles({ roles: ['admin'] })
+    // @Roles({ roles: ['admin'] })
     async create(@Body() createRoomDto: CreateRoomDto): Promise<Room> {
         return this.roomsService.create(createRoomDto);
     }

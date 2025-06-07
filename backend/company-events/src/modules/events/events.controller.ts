@@ -12,7 +12,7 @@ export class EventsController {
 
 
     @Get()
-    @Roles({ roles: ['admin', 'user'] })
+    // @Roles({ roles: ['admin', 'user'] })
     async findAll(): Promise<Event[]> {
         return this.eventsService.findAllEvents();
     }
@@ -47,7 +47,6 @@ export class EventsController {
     }
 
     @Post()
-    @UseGuards(KeycloakAuthGuard)
     async createEvent(
         @Body() createEventDto: CreateEventDto,
         @Req() req: any
