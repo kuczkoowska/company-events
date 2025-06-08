@@ -1,6 +1,7 @@
 import {Module} from '@nestjs/common';
-import {AuthGuard, KeycloakConnectModule, ResourceGuard, RoleGuard} from 'nest-keycloak-connect';
+import {KeycloakConnectModule, ResourceGuard, RoleGuard} from 'nest-keycloak-connect';
 import {APP_GUARD} from '@nestjs/core';
+import {KeycloakAuthGuard} from "./keycloak-auth.guard";
 
 @Module({
     imports: [
@@ -15,7 +16,8 @@ import {APP_GUARD} from '@nestjs/core';
         // These are global guards that will protect all endpoints
         {
             provide: APP_GUARD,
-            useClass: AuthGuard,
+            // useClass: AuthGuard,
+            useClass: KeycloakAuthGuard
         },
         {
             provide: APP_GUARD,
