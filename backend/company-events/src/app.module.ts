@@ -1,6 +1,7 @@
 import {Module} from '@nestjs/common';
 import {TypeOrmModule} from '@nestjs/typeorm';
 import {AppController} from './app.controller';
+import {HealthController} from './health.controller';
 import {AppService} from './app.service';
 import {EventsModule} from './modules/events/events.module';
 import {RoomsModule} from './modules/rooms/rooms.module';
@@ -36,7 +37,7 @@ console.log('ENV:', process.env);
         RoomsModule,
         KeycloakModule,
     ],
-    controllers: [AppController],
+    controllers: [AppController, HealthController],
     providers: [AppService],
 })
 export class AppModule {

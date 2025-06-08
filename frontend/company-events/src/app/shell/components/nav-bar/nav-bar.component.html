@@ -1,4 +1,5 @@
-<nav class="bg-gradient-to-r from-pink-500 to-purple-600 shadow-xl">
+<nav class="bg-gradient-to-r from-pink-500 to-purple-600 shadow-xl"
+>
   <div class="container mx-auto px-6 py-4 flex justify-between items-center">
     <!-- Logo and always visible navigation items -->
     <div class="flex items-center space-x-8">
@@ -6,25 +7,27 @@
       <a routerLink="/about" class="text-white hover:text-yellow-200 transition duration-300 text-lg">About</a>
 
       <!-- Items visible only to authenticated users -->
-      @if (authenticated){
-        <a routerLink="/events" class="text-white text-lg">Events</a>
-        <a routerLink="/rooms" class="text-white text-lg">Rooms</a>
-        <a routerLink="/profile" class="text-white text-lg">Profile</a>
-      }
+      <a routerLink="/events" class="text-white text-lg" *kaHasRoles="['admin', 'user']; checkRealm:true">Events</a>
+      <a routerLink="/rooms" class="text-white text-lg" *kaHasRoles="['admin', 'user']; checkRealm:true">Rooms</a>
+      <a routerLink="/profile" class="text-white text-lg" *kaHasRoles="['admin', 'user']; checkRealm:true">Profile</a>
 
       <!-- Admin-only items -->
-      @if (isAdmin()){
-        <a routerLink="/admin" class="text-white text-lg">Admin Panel</a>
-      }
+      <a routerLink="/admin" class="text-white text-lg" *kaHasRoles="['admin']; checkRealm:true">Admin Panel</a>
     </div>
 
     <!-- Authentication buttons -->
     <div class="flex items-center space-x-6">
-      @if (!authenticated){
-        <button (click)="login()" class="bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-full transition duration-300 text-lg shadow-md">Login</button>
+      @if (!authenticated) {
+        <button (click)="login()"
+                class="bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-full transition duration-300 text-lg shadow-md">
+          Login
+        </button>
       }
-      @if (authenticated){
-        <button (click)="logout()" class="bg-fuchsia-600 hover:bg-fuchsia-700 text-white px-6 py-3 rounded-full transition duration-300 text-lg shadow-md">Logout</button>
+      @if (authenticated) {
+        <button (click)="logout()"
+                class="bg-fuchsia-600 hover:bg-fuchsia-700 text-white px-6 py-3 rounded-full transition duration-300 text-lg shadow-md">
+          Logout
+        </button>
       }
     </div>
   </div>

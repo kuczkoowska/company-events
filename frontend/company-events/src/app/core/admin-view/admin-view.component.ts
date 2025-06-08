@@ -8,7 +8,7 @@ import {
   signal,
   WritableSignal
 } from '@angular/core';
-import {RouterModule} from '@angular/router';
+import {Router, RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {EventsService} from '@company/core/services/events.service';
 import {IEvent} from '@company/shared/models/event.interface';
@@ -37,6 +37,10 @@ export class AdminViewComponent {
   public showEventForm: WritableSignal<boolean> = signal(false);
   public roomName: string = '';
   public roomCapacity: number | null = null;
+
+  public constructor(private router: Router) {
+  }
+
 
   public allEventsResource: ResourceRef<IEvent[]> = rxResource({
     loader: () => this.eventsService.getAllEvents()
@@ -82,4 +86,8 @@ export class AdminViewComponent {
     this.roomsService.createRoom(room).subscribe(() => this.roomsResource.reload())
   }
 
+  navigateToAbout(): void {
+    this.router.navigate(['/about']);
+  }
+  
 }

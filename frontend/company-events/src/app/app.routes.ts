@@ -1,34 +1,34 @@
-import { Routes } from '@angular/router';
-import { canActivateAuthRole } from './guards/auth-role.guard';
+import {Routes} from '@angular/router';
+import {canActivateAuthRole} from '@company/guards/app-auth.guard';
 
 
 export const routes: Routes = [
-    {
-        path: '',
-        loadComponent: () => import('./shell/shell.component').then(m => m.ShellComponent),
-        children: [
-            {
-                path: 'events',
-                canActivate: [canActivateAuthRole],
-                data: { role: ['admin', 'user'] }, // Protected route
-                loadChildren: () => import('@company/core/events-view/events.routing').then(m => m.default)
-            },
-            {
-                path: 'rooms',
-                canActivate: [canActivateAuthRole],
-                data: { role: ['admin', 'user'] }, // Protected route
-                loadChildren: () => import('@company/core/home-view/home.routing').then(m => m.default)
-            },
-            {
-                path: 'about',
-                loadChildren: () => import('@company/core/about-view/about.routing') // Public route
-            }
-        ]
-    },
+  {
+    path: '',
+    loadComponent: () => import('./shell/shell.component').then(m => m.ShellComponent),
+    children: [
+      {
+        path: 'events',
+        canActivate: [canActivateAuthRole],
+        data: {role: ['admin', 'user']},
+        loadChildren: () => import('@company/core/events-view/events.routing').then(m => m.default)
+      },
+      {
+        path: 'rooms',
+        canActivate: [canActivateAuthRole],
+        data: {role: ['admin', 'user']}, // Protected route
+        loadChildren: () => import('@company/core/home-view/home.routing').then(m => m.default)
+      },
+      {
+        path: 'about',
+        loadChildren: () => import('@company/core/about-view/about.routing') // Public route
+      }
+    ]
+  },
   {
     path: 'admin',
     canActivate: [canActivateAuthRole],
-    data: { role: ['admin'] },
+    data: {role: ['admin']},
     loadComponent: () => import('@company/core/admin-view/admin-view.component').then(m => m.AdminViewComponent),
     // children: [
     //   {
@@ -53,8 +53,8 @@ export const routes: Routes = [
     //   }
     // ]
   },
-    {
-        path: '**',
-        redirectTo: '/about'
-    },
+  {
+    path: '**',
+    redirectTo: '/about'
+  },
 ];

@@ -1,18 +1,20 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from 'rxjs';
-import { createEvent } from '@company/shared/models/createEvent';
-import { IEvent } from '@company/shared/models/event.interface';
+import {Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
+import {Observable} from 'rxjs';
+import {createEvent} from '@company/shared/models/createEvent';
+import {IEvent} from '@company/shared/models/event.interface';
+import {environment} from '../../../../environments/environment'
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventsService {
-  private apiUrl = 'api/events';
+  private apiUrl: string = `${environment.apiUrl}/events`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
-  getAllEvents(): Observable<IEvent[]>{
+  getAllEvents(): Observable<IEvent[]> {
     return this.http.get<IEvent[]>(this.apiUrl);
   }
 
@@ -20,15 +22,15 @@ export class EventsService {
     return this.http.get<IEvent>(`${this.apiUrl}/${id}`);
   }
 
-  getUpcomingEvents(): Observable<IEvent[]>{
+  getUpcomingEvents(): Observable<IEvent[]> {
     return this.http.get<IEvent[]>(`${this.apiUrl}/upcoming`);
   }
 
-  getPastEvents(): Observable<IEvent[]>{
+  getPastEvents(): Observable<IEvent[]> {
     return this.http.get<IEvent[]>(`${this.apiUrl}/past`);
   }
 
-  getOnGoingEvents(): Observable<IEvent[]>{
+  getOnGoingEvents(): Observable<IEvent[]> {
     return this.http.get<IEvent[]>(`${this.apiUrl}/on-going`);
   }
 

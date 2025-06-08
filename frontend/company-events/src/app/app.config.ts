@@ -8,7 +8,8 @@ import {
   UserActivityService,
   withAutoRefreshToken
 } from 'keycloak-angular';
-import {provideHttpClient, withFetch} from '@angular/common/http';
+import {provideHttpClient, withFetch, withInterceptors} from '@angular/common/http';
+import {tokenInterceptor} from '@company/interceptors/auth.interceptor';
 
 export const provideKeycloakAngular = () =>
   provideKeycloak({
@@ -19,8 +20,9 @@ export const provideKeycloakAngular = () =>
     },
     initOptions: {
       onLoad: 'check-sso',
-      checkLoginIframe: false,
-      // silentCheckSsoRedirectUri: window.location.origin + '/public/silent-check-sso.html?v='+ new Date().getTime(),
+      checkLoginIframe: true,
+      silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
+      // enableLogging: true,
     },
     features: [
       withAutoRefreshToken({
@@ -36,7 +38,7 @@ export const appConfig: ApplicationConfig = {
     provideKeycloakAngular(),
     provideZoneChangeDetection({eventCoalescing: true}),
     provideRouter(routes),
-    provideHttpClient(withFetch()),
-    KeycloakService // Explicitly provide KeycloakService
+    provideHttpClient(withFetch(), withInterceptors([tokenInterceptor])),
+    KeycloakService,
   ]
 };
