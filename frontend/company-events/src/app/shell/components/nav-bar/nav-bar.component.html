@@ -9,7 +9,6 @@
       <!-- Items visible only to authenticated users -->
       <a routerLink="/events" class="text-white text-lg" *kaHasRoles="['admin', 'user']; checkRealm:true">Events</a>
       <a routerLink="/rooms" class="text-white text-lg" *kaHasRoles="['admin', 'user']; checkRealm:true">Rooms</a>
-      <a routerLink="/profile" class="text-white text-lg" *kaHasRoles="['admin', 'user']; checkRealm:true">Profile</a>
 
       <!-- Admin-only items -->
       <a routerLink="/admin" class="text-white text-lg" *kaHasRoles="['admin']; checkRealm:true">Admin Panel</a>

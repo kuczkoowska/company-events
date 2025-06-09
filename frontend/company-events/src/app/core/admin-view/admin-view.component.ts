@@ -20,13 +20,15 @@ import {SharedButtonComponent} from '@company/shared/components/shared-button/sh
 import {EventFiltersComponent} from '@company/core/admin-view/components/event-filters/event-filters.component';
 import {RoomListComponent} from '@company/core/admin-view/components/room-list/room-list.component';
 import {RoomFormComponent} from '@company/core/admin-view/components/room-form/room-form.component';
+import {EventFormComponent} from '@company/core/admin-view/components/event-form/event-form.component';
+import {createEvent} from '@company/shared/models/createEvent';
 
 @Component({
   selector: 'app-admin-view',
   templateUrl: './admin-view.component.html',
   styleUrls: ['./admin-view.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, SharedButtonComponent, EventFiltersComponent, RoomListComponent, RoomFormComponent],
+  imports: [CommonModule, RouterModule, FormsModule, SharedButtonComponent, EventFiltersComponent, RoomListComponent, RoomFormComponent, EventFormComponent],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdminViewComponent {
@@ -89,5 +91,20 @@ export class AdminViewComponent {
   navigateToAbout(): void {
     this.router.navigate(['/about']);
   }
-  
+
+  public createEvent(formData: Omit<IEvent, 'id' | 'organizer' | 'participants' | 'location'> & { roomId: string }) {
+    console.log(formData);
+    const eventData: createEvent = {
+      name: formData.name,
+      date: formData.date,
+      eventStart: formData.eventStart,
+      eventEnd: formData.eventEnd,
+      location: formData.roomId,
+      description: formData.description,
+      tags: formData.tags,
+      maxParticipants: formData.maxParticipants
+    };
+
+    this.eventsService.createEvent(eventData).subscribe(() => this.allEventsResource.reload());
+  }
 }
