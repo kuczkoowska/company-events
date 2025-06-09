@@ -11,7 +11,6 @@ import {KeycloakProfile} from 'keycloak-js';
 export class AuthService {
   private currentUserSubject = new BehaviorSubject<KeycloakProfile | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
-  private readonly API_URL = 'http://localhost:3000/auth';
 
   constructor(
     private http: HttpClient,

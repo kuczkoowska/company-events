@@ -17,7 +17,7 @@ export class KeycloakAuthGuard extends AuthGuard {
 
             // Get Keycloak config from your module
             const keycloakConfig = {
-                'auth-server-url': 'http://keycloak:8080',
+                'auth-server-url': 'http://localhost/auth',
                 'realm': 'events-realm'
             };
 
