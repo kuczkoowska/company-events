@@ -1,21 +1,26 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
-import { Room } from './entities/room.entity';
+import {Injectable, NotFoundException} from '@nestjs/common';
+import {InjectRepository} from '@nestjs/typeorm';
+import {Repository} from 'typeorm';
+import {Room} from './entities/room.entity';
 
 @Injectable()
 export class RoomsService {
     constructor(
         @InjectRepository(Room)
         private roomRepository: Repository<Room>
-    ) {}
+    ) {
+    }
 
     async findAll(): Promise<Room[]> {
         return await this.roomRepository.find();
     }
 
-    async findOne(id: number): Promise<Room | null> {
-        return await this.roomRepository.findOne({ where: { id } });
+    async findOne(id: number): Promise<Room> {
+        const room = await this.roomRepository.findOne({where: {id}});
+        if (!room) {
+            throw new NotFoundException(`Room with ID ${id} not found`);
+        }
+        return room;
     }
 
     async create(room: Partial<Room>): Promise<Room> {
@@ -25,25 +30,22 @@ export class RoomsService {
 
     async update(id: number, room: Partial<Room>): Promise<Room> {
         await this.roomRepository.update(id, room);
-        const updatedRoom = await this.findOne(id);
-        if (!updatedRoom) {
-            throw new Error(`Room with ID ${id} not found`);
-        }
-        return updatedRoom;
+        return await this.findOne(id);
     }
 
     async delete(id: number): Promise<void> {
+        await this.findOne(id);
         await this.roomRepository.delete(id);
     }
 
     async getRoomEvents(roomId: number): Promise<Room> {
         const room = await this.roomRepository.findOne({
-            where: { id: roomId },
+            where: {id: roomId},
             relations: ['events']
         });
 
         if (!room) {
-            throw new Error(`Room with ID ${roomId} not found`);
+            throw new NotFoundException(`Room with ID ${roomId} not found`);
         }
 
         return room;

@@ -1,4 +1,4 @@
-import {Component, inject, ResourceLoaderParams, ResourceRef} from '@angular/core';
+import {Component, inject, ResourceRef} from '@angular/core';
 import {IEvent} from '@company/shared/models/event.interface';
 import {CommonModule} from '@angular/common';
 import {EventsService} from '@company/core/services/events.service';
@@ -17,10 +17,6 @@ export class EventListComponent {
 
   public upcomingEventsResource: ResourceRef<IEvent[]> = rxResource({
     loader: () => this.eventsService.getUpcomingEvents()
-  })
-
-  public searchEventsByTagsResource: ResourceRef<IEvent[]> = rxResource({
-    loader: (params: ResourceLoaderParams<unknown>) => this.eventsService.searchEventsByTags(params as unknown as string)
   })
 
   onDetails(): void {

@@ -1,24 +1,25 @@
-import { Injectable } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import {In, LessThanOrEqual, MoreThan, Repository} from 'typeorm';
-import { Event } from './entities/event.entity';
-import { CreateEventDto } from './create-event.dto';
-import { Room } from '../rooms/entities/room.entity';
+import {Injectable, NotFoundException} from '@nestjs/common';
+import {InjectRepository} from '@nestjs/typeorm';
+import {In, LessThan, LessThanOrEqual, MoreThan, Repository} from 'typeorm';
+import {Event} from './entities/event.entity';
+import {CreateEventDto} from './create-event.dto';
+import {Room} from '../rooms/entities/room.entity';
 
 @Injectable()
 export class EventsService {
     constructor(
         @InjectRepository(Event)
         private eventRepository: Repository<Event>,
-    @InjectRepository(Room)
-    private roomRepository: Repository<Room>
-    ) {}
+        @InjectRepository(Room)
+        private roomRepository: Repository<Room>
+    ) {
+    }
 
 
     async createEvent(createEventDto: CreateEventDto, userId: string): Promise<Event> {
-        const room = await this.roomRepository.findOne({ where: { id: createEventDto.roomId }});
+        const room = await this.roomRepository.findOne({where: {id: createEventDto.roomId}});
         if (!room) {
-            throw new Error('Room not found');
+            throw new NotFoundException(`Room with ID ${createEventDto.roomId} not found`);
         }
 
         const event: Event = this.eventRepository.create({
@@ -35,8 +36,12 @@ export class EventsService {
         return await this.eventRepository.find();
     }
 
-    async findEventById(id: number): Promise<Event | null> {
-        return await this.eventRepository.findOne({ where: { id } });
+    async findEventById(id: number): Promise<Event> {
+        const event = await this.eventRepository.findOne({where: {id}});
+        if (!event) {
+            throw new NotFoundException(`Event with ID ${id} not found`);
+        }
+        return event;
     }
 
     async findUpcomingEvents(): Promise<Event[]> {
@@ -51,11 +56,11 @@ export class EventsService {
         });
     }
 
-    findPastEvents(): Promise<Event[]> {
+    async findPastEvents(): Promise<Event[]> {
         const currentDate = new Date();
-        return this.eventRepository.find({
+        return await this.eventRepository.find({
             where: {
-                date: MoreThan(currentDate),
+                date: LessThan(currentDate),
             },
             order: {
                 date: 'DESC',
@@ -63,13 +68,14 @@ export class EventsService {
         });
     }
 
-    findOnGoingEvents(): Promise<Event[]> {
-        const currentDate = new Date();
-        const currentTime = new Date().getTime().toString();
-        return this.eventRepository.find({
+    async findOnGoingEvents(): Promise<Event[]> {
+        const now = new Date();
+        const currentTime = now.toTimeString().split(' ')[0];
+
+        return await this.eventRepository.find({
             where: {
-                date: LessThanOrEqual(currentDate),
-                eventStart: LessThanOrEqual(currentTime), // Compare with current date and time
+                date: LessThanOrEqual(now),
+                eventStart: LessThanOrEqual(currentTime),
                 eventEnd: MoreThan(currentTime),
             },
             order: {
@@ -78,15 +84,15 @@ export class EventsService {
         });
     }
 
-    searchEventsByTags(tag: string): Promise<Event[]> {
-        return this.eventRepository.find({
+    async searchEventsByTags(tag: string): Promise<Event[]> {
+        return await this.eventRepository.find({
             where: {
                 tags: In([tag]),
             },
             order: {
                 date: 'ASC',
             },
-        })
+        });
     }
 
 }

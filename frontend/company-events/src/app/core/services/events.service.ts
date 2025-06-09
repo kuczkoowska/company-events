@@ -31,12 +31,12 @@ export class EventsService {
   }
 
   getOnGoingEvents(): Observable<IEvent[]> {
-    return this.http.get<IEvent[]>(`${this.apiUrl}/on-going`);
+    return this.http.get<IEvent[]>(`${this.apiUrl}/ongoing`);
   }
 
-  searchEventsByTags(tag: string): Observable<IEvent[]> {
-    return this.http.get<IEvent[]>(`${this.apiUrl}/search/${tag}`);
-  }
+  // searchEventsByTags(tag: string): Observable<IEvent[]> {
+  //   return this.http.get<IEvent[]>(`${this.apiUrl}/search/${tag}`);
+  // }
 
   createEvent(event: createEvent): Observable<IEvent> {
     return this.http.post<IEvent>(this.apiUrl, event);

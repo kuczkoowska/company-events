@@ -1,13 +1,7 @@
 import {ApplicationConfig, provideZoneChangeDetection} from '@angular/core';
 import {provideRouter} from '@angular/router';
 import {routes} from './app.routes';
-import {
-  AutoRefreshTokenService,
-  KeycloakService,
-  provideKeycloak,
-  UserActivityService,
-  withAutoRefreshToken
-} from 'keycloak-angular';
+import {AutoRefreshTokenService, KeycloakService, provideKeycloak, UserActivityService} from 'keycloak-angular';
 import {provideHttpClient, withFetch, withInterceptors} from '@angular/common/http';
 import {tokenInterceptor} from '@company/interceptors/auth.interceptor';
 
@@ -19,17 +13,11 @@ export const provideKeycloakAngular = () =>
       clientId: 'angular-client'
     },
     initOptions: {
-      onLoad: 'check-sso',
-      checkLoginIframe: true,
-      silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
-      // enableLogging: true,
+      onLoad: 'login-required',
+      checkLoginIframe: false,
+      // silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html',
+      enableLogging: true,
     },
-    features: [
-      withAutoRefreshToken({
-        onInactivityTimeout: 'logout',
-        sessionTimeout: 60000
-      })
-    ],
     providers: [AutoRefreshTokenService, UserActivityService]
   });
 

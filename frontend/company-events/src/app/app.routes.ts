@@ -9,8 +9,8 @@ export const routes: Routes = [
     children: [
       {
         path: 'events',
-        canActivate: [canActivateAuthRole],
-        data: {role: ['admin', 'user']},
+        // canActivate: [canActivateAuthRole],
+        // data: {role: ['admin', 'user']},
         loadChildren: () => import('@company/core/events-view/events.routing').then(m => m.default)
       },
       {

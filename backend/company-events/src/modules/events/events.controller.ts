@@ -12,51 +12,47 @@ export class EventsController {
     }
 
     @Get()
-    @Roles({roles: ['admin', 'user']})
-    async findAll(): Promise<Event[]> {
+    @Roles({roles: ['realm:admin', 'realm:user']})
+    findAll(): Promise<Event[]> {
         return this.eventsService.findAllEvents();
     }
 
     @Get('upcoming')
-    @Roles({roles: ['admin', 'user']})
-    async findUpcoming(): Promise<Event[]> {
+    @Roles({roles: ['realm:admin', 'realm:user']})
+    findUpcoming(): Promise<Event[]> {
         return this.eventsService.findUpcomingEvents();
     }
 
     @Get('past')
-    @Roles({roles: ['admin', 'user']})
+    @Roles({roles: ['realm:admin', 'realm:user']})
     findPast(): Promise<Event[]> {
         return this.eventsService.findPastEvents();
     }
 
-    @Get('on-going')
-    @Roles({roles: ['admin', 'user']})
+    @Get('ongoing')
+    @Roles({roles: ['realm:admin', 'realm:user']})
     findOngoing(): Promise<Event[]> {
         return this.eventsService.findOnGoingEvents();
     }
 
     @Get('search/:tags')
-    @Roles({roles: ['admin', 'user']})
-    async search(@Param('tags') tag: string): Promise<Event[]> {
+    @Roles({roles: ['realm:admin', 'realm:user']})
+    search(@Param('tags') tag: string): Promise<Event[]> {
         return this.eventsService.searchEventsByTags(tag);
     }
 
     @Get(':id')
-    @Roles({roles: ['admin', 'user']})
-    async findOne(@Param('id') id: number): Promise<Event> {
-        const event = await this.eventsService.findEventById(id);
-        if (!event) {
-            throw new Error(`Event with ID ${id} not found`);
-        }
-        return event;
+    @Roles({roles: ['realm:admin', 'realm:user']})
+    findOne(@Param('id') id: number): Promise<Event> {
+        return this.eventsService.findEventById(id);
     }
 
     @Post()
-    @Roles({roles: ['admin']}) // Tylko admin może tworzyć eventy
+    @Roles({roles: ['realm:admin']})
     async createEvent(
         @Body() createEventDto: CreateEventDto,
         @Req() req: any
-    ) {
+    ): Promise<Event> {
         const userId = req.user?.sub; // Keycloak ID
         return this.eventsService.createEvent(createEventDto, userId);
     }
