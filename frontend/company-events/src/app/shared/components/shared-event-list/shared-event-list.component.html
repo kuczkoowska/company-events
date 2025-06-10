@@ -7,16 +7,16 @@
         <div class="space-y-2">
           <p class="text-gray-600 flex items-center">
             <span class="material-icons mr-2">Date:</span>
-            <span class="font-medium text-gray-700">{{ event.date }}</span>
+            <span class="font-medium text-gray-700">{{ event.date | date:'EEEE, d MMMM y' }}</span>
           </p>
           <p class="text-gray-600 flex items-center">
             <span class="material-icons mr-2">Time:</span>
-            {{ event.eventStart }} - {{ event.eventEnd }}
+            {{ event.eventStart | timeRange:event.eventEnd }}
           </p>
-          <p class="text-gray-600 flex items-center">
-            <span class="material-icons mr-2">Location:</span>
-            {{ event.location }}
-          </p>
+          <!--          <p class="text-gray-600 flex items-center">-->
+          <!--            <span class="material-icons mr-2">Location:</span>-->
+          <!--            {{ event.location }}-->
+          <!--          </p>-->
           <p class="text-gray-600 flex items-center">
             <span class="material-icons mr-2">Organizer:</span>
             {{ event.organizer }}
