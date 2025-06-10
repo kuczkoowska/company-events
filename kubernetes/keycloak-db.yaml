@@ -29,7 +29,7 @@ spec:
                   name: keycloak-secrets
                   key: db-password
             - name: POSTGRES_DB
-              value: keycloak_kubernetes_db
+              value: keycloak_db
           volumeMounts:
             - name: keycloak-db-volume
               mountPath: /var/lib/postgresql/data

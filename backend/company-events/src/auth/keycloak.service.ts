@@ -6,7 +6,7 @@ import {KeycloakAuthGuard} from "./keycloak-auth.guard";
 @Module({
     imports: [
         KeycloakConnectModule.register({
-            authServerUrl: 'http://localhost/auth',
+            authServerUrl: 'http://myapp.local/keycloak',
             realm: 'events-realm',
             clientId: 'company-events-backend',
             secret: 'AvmM7M1OGt9WSsNLi135tigRvihwyWVx',

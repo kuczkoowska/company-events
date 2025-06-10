@@ -8,7 +8,7 @@ import {tokenInterceptor} from '@company/interceptors/auth.interceptor';
 export const provideKeycloakAngular = () =>
   provideKeycloak({
     config: {
-      url: 'http://localhost',
+      url: 'http://myapp.local/keycloak',
       realm: 'events-realm',
       clientId: 'angular-client'
     },

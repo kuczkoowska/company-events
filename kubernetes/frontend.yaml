@@ -17,9 +17,11 @@ spec:
           image: jagoda/angular-frontend:alpine
           imagePullPolicy: Never
           command:
-            - "npm"
+            - "ng"
           args:
-            - "start"
+            - "serve"
+            - "--host"
+            - "0.0.0.0"
           ports:
             - containerPort: 4200
           envFrom:
