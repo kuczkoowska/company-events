@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: jagoda/nest-backend:alpine
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: app-backend-config
+            - secretRef:
+                name: app-backend-secrets
+          volumeMounts:
+            - name: backend-volume
+              mountPath: /app
+      volumes:
+        - name: backend-volume
+          hostPath:
+            path: /home/jagoda/studia/bap/PanelFirmowy/company-events/backend/company-events
