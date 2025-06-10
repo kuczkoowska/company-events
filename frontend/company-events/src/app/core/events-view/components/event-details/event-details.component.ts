@@ -1,9 +1,12 @@
 import {ChangeDetectionStrategy, Component, input, InputSignal, signal, WritableSignal} from '@angular/core';
 import {IEvent} from '@company/shared/models/event.interface';
+import {HasRolesDirective} from 'keycloak-angular';
 
 @Component({
   selector: 'app-event-details',
-  imports: [],
+  imports: [
+    HasRolesDirective
+  ],
   templateUrl: './event-details.component.html',
   styleUrl: './event-details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

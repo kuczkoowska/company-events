@@ -22,8 +22,9 @@ export class EventsService {
     return this.http.get<IEvent>(`${this.apiUrl}/${id}`);
   }
 
-  getUpcomingEvents(): Observable<IEvent[]> {
-    return this.http.get<IEvent[]>(`${this.apiUrl}/upcoming`);
+  getUpcomingEvents(includeParticipants: boolean = false): Observable<IEvent[]> {
+    const params = includeParticipants ? {includeParticipants: 'true'} : {};
+    return this.http.get<IEvent[]>(`${this.apiUrl}/upcoming`, {params});
   }
 
   getPastEvents(): Observable<IEvent[]> {
