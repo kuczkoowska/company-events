@@ -18,19 +18,19 @@ console.log('ENV:', process.env);
     imports: [
         TypeOrmModule.forRoot({
             type: 'postgres',
-            host: 'db',
+            host: 'db.default.svc.cluster.local',
             port: 5432,
-            username: process.env.DB_USER,
-            password: process.env.DB_PASSWORD,
-            database: 'events_db',
+            username: process.env.DB_USER || 'jagoda',
+            password: process.env.DB_PASSWORD || 'jagoda',
+            database: 'events_kubernetes_db',
             entities: [Event, Room],
             synchronize: true,
             logging: true,
             retryAttempts: 10,
             retryDelay: 3000,
-            extra: {
-                hostAddress: 'db' // Force IPv4
-            }
+            // extra: {
+            //     hostAddress: 'events-db' // Force IPv4
+            // }
         }),
 
         EventsModule,
