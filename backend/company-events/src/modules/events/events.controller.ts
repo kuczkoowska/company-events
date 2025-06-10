@@ -19,29 +19,8 @@ export class EventsController {
 
     @Get('upcoming')
     @Roles({roles: ['realm:admin', 'realm:user']})
-    async findUpcoming(@UserRoles() roles: string[]): Promise<EventDto[]> {
-        const events = await this.eventsService.findUpcomingEvents();
-
-        return events.map(event => {
-            const eventDto: EventDto = {
-                id: event.id,
-                name: event.name,
-                date: event.date,
-                eventStart: event.eventStart,
-                eventEnd: event.eventEnd,
-                location: event.location,
-                organizerId: event.organizerId,
-                description: event.description,
-                tags: event.tags,
-                maxParticipants: event.maxParticipants,
-            };
-
-            if (roles.includes('realm:admin')) {
-                eventDto.participants = event.participants;
-            }
-
-            return eventDto;
-        });
+    findUpcoming(): Promise<Event[]> {
+        return this.eventsService.findUpcomingEvents();
     }
 
     @Get('past')
@@ -68,6 +47,7 @@ export class EventsController {
         return this.eventsService.findEventById(id);
     }
 
+    // do poprawy
     @Post()
     @Roles({roles: ['realm:admin']})
     async createEvent(

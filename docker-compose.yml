@@ -166,6 +166,7 @@ volumes:
 
 networks:
   company-network:
+    driver: bridge
 
 #secrets:
 #  db_user:

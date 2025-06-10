@@ -1,20 +1,9 @@
-# Version control
 .git
 .gitignore
-
-# Node.js
 node_modules
-
-# Build outputs
 dist
 build
-
-# Development/environment files
-../../.env
 .dockerignore
-../../docker-compose.yml
-
-# Editor directories and files
 .idea
 .vscode
 
