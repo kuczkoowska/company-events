@@ -17,11 +17,10 @@ spec:
           image: jagoda/angular-frontend:alpine
           imagePullPolicy: Never
           command:
-            - "ng"
+            - "/bin/sh"
+            - "-c"
           args:
-            - "serve"
-            - "--host"
-            - "0.0.0.0"
+            - "npm run start -- --host 0.0.0.0 --allowed-hosts myapp.local"
           ports:
             - containerPort: 4200
           envFrom:
@@ -36,6 +35,7 @@ metadata:
 spec:
   selector:
     app: frontend
+  type: LoadBalancer
   ports:
     - port: 4200
       targetPort: 4200

@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: backend
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: backend
@@ -16,8 +16,17 @@ spec:
         - name: backend
           image: jagoda/nest-backend:alpine
           imagePullPolicy: Never
+          command: [ "npm" ]
+          args: [ "run", "start:dev" ]
           ports:
             - containerPort: 3000
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 500m
+              memory: 256Mi
           envFrom:
             - configMapRef:
                 name: app-backend-config
@@ -28,5 +37,5 @@ spec:
               mountPath: /app
       volumes:
         - name: backend-volume
-          hostPath:
-            path: /home/jagoda/studia/bap/PanelFirmowy/company-events/backend/company-events
+          persistentVolumeClaim:
+            claimName: backend-pvc
