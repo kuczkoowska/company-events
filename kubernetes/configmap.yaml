@@ -3,13 +3,5 @@ kind: ConfigMap
 metadata:
   name: app-config
 data:
-  DB_NAME: events_db_kubernetes
   DB_PORT: "5432"
-  KC_DB: postgres
-  KC_DB_URL: jdbc:postgresql://keycloak-db:5432/keycloak
-  KC_HEALTH_ENABLED: "true"
-  KC_METRICS_ENABLED: "true"
-  KC_HOSTNAME_STRICT: "false"
-  KC_HOSTNAME_URL: http://keycloak:8080
-  KC_HOSTNAME_ADMIN_URL: http://keycloak:8080
-  NODE_ENV: development
+  API_PORT: "3000"

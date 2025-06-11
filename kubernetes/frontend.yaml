@@ -16,6 +16,13 @@ spec:
         - name: frontend
           image: jagoda/angular-frontend:alpine
           imagePullPolicy: Never
+          resources:
+            requests:
+              cpu: "150m"
+              memory: "192Mi"
+            limits:
+              cpu: "300m"
+              memory: "384Mi"
           command:
             - "/bin/sh"
             - "-c"
