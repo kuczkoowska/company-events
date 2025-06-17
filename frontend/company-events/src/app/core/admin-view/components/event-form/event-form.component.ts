@@ -1,6 +1,6 @@
 import {ChangeDetectionStrategy, Component, inject, OnInit, output, OutputEmitterRef, ResourceRef} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {RoomsService} from '@company/core/services/rooms.service';
+import {RoomsService} from '@company/shared/services/rooms.service';
 import {ICreateEventForm} from '@company/shared/models/createEvent';
 import {IEvent} from '@company/shared/models/event.interface';
 import {rxResource} from '@angular/core/rxjs-interop';

@@ -10,10 +10,10 @@ import {
 } from '@angular/core';
 import {Router, RouterModule} from '@angular/router';
 import {CommonModule} from '@angular/common';
-import {EventsService} from '@company/core/services/events.service';
+import {EventsService} from '@company/shared/services/events.service';
 import {IEvent} from '@company/shared/models/event.interface';
 import {rxResource} from '@angular/core/rxjs-interop';
-import {RoomsService} from '@company/core/services/rooms.service';
+import {RoomsService} from '@company/shared/services/rooms.service';
 import {IRoom} from '@company/shared/models/room.interface';
 import {FormsModule} from '@angular/forms';
 import {SharedButtonComponent} from '@company/shared/components/shared-button/shared-button.component';
@@ -22,19 +22,23 @@ import {RoomListComponent} from '@company/core/admin-view/components/room-list/r
 import {RoomFormComponent} from '@company/core/admin-view/components/room-form/room-form.component';
 import {EventFormComponent} from '@company/core/admin-view/components/event-form/event-form.component';
 import {createEvent} from '@company/shared/models/createEvent';
+import {FeedbackComponent} from '@company/core/admin-view/components/feedback/feedback.component';
+import {FeedbackService} from '@company/shared/services/feedback.service';
+import {IFeedback} from '@company/shared/models/feedback.interface';
 
 @Component({
   selector: 'app-admin-view',
   templateUrl: './admin-view.component.html',
   styleUrls: ['./admin-view.component.scss'],
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, SharedButtonComponent, EventFiltersComponent, RoomListComponent, RoomFormComponent, EventFormComponent],
+  imports: [CommonModule, RouterModule, FormsModule, SharedButtonComponent, EventFiltersComponent, RoomListComponent, RoomFormComponent, EventFormComponent, FeedbackComponent],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdminViewComponent {
-  public activeTab: WritableSignal<'events' | 'rooms'> = signal('events');
+  public activeTab: WritableSignal<'events' | 'rooms' | 'feedback'> = signal('events');
   private eventsService: EventsService = inject(EventsService);
   private roomsService = inject(RoomsService);
+  private feedbackService = inject(FeedbackService);
   public showRoomForm: WritableSignal<boolean> = signal(false);
   public showEventForm: WritableSignal<boolean> = signal(false);
   public roomName: string = '';
@@ -60,6 +64,13 @@ export class AdminViewComponent {
     loader: () => this.eventsService.getOnGoingEvents()
   })
 
+  public roomsResource: ResourceRef<IRoom[]> = rxResource({
+    loader: () => this.roomsService.getAllRooms()
+  });
+
+  public feedbackResource: ResourceRef<IFeedback[]> = rxResource({
+    loader: () => this.feedbackService.getAllFeedbacks()
+  });
 
   private readonly filter: WritableSignal<'upcoming' | 'past' | 'ongoing' | 'all'> = signal('all');
 
@@ -80,9 +91,6 @@ export class AdminViewComponent {
     this.filter.set(filter);
   }
 
-  public roomsResource: ResourceRef<IRoom[]> = rxResource({
-    loader: () => this.roomsService.getAllRooms()
-  });
 
   public createRoom(room: Partial<IRoom>) {
     this.roomsService.createRoom(room).subscribe(() => this.roomsResource.reload())
@@ -107,4 +115,5 @@ export class AdminViewComponent {
 
     this.eventsService.createEvent(eventData).subscribe(() => this.allEventsResource.reload());
   }
+
 }

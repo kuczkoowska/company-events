@@ -1,7 +1,7 @@
 import {Component, inject, ResourceRef} from '@angular/core';
 import {IEvent} from '@company/shared/models/event.interface';
 import {CommonModule} from '@angular/common';
-import {EventsService} from '@company/core/services/events.service';
+import {EventsService} from '@company/shared/services/events.service';
 import {rxResource} from '@angular/core/rxjs-interop';
 import {SharedEventListComponent} from '@company/shared/components/shared-event-list/shared-event-list.component';
 

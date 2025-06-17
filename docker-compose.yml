@@ -137,6 +137,8 @@ services:
     depends_on:
       backend:
         condition: service_healthy
+      feedback:
+        condition: service_healthy
     networks:
       - company-network
     healthcheck:
@@ -144,6 +146,42 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+
+  feedback:
+    build:
+      context: ./backend/feedback
+      dockerfile: Dockerfile
+    container_name: feedback_service
+    ports:
+      - "3001:3000"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=events_db
+      - NODE_ENV=development
+      - KEYCLOAK_REALM=${KEYCLOAK_REALM}
+      - KEYCLOAK_URL=${KEYCLOAK_URL}
+      - KEYCLOAK_CLIENT_ID=${KEYCLOAK_CLIENT_ID}
+      - KEYCLOAK_ADMIN=${KEYCLOAK_ADMIN}
+      - KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD}
+    depends_on:
+      db:
+        condition: service_healthy
+      keycloak:
+        condition: service_healthy
+    volumes:
+      - ./backend/feedback:/app
+      - /app/node_modules
+    networks:
+      - company-network
+    healthcheck:
+      test: [ "CMD-SHELL", "nc -z localhost 3000" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
 
   nginx:
     image: nginx:alpine
