@@ -3,6 +3,7 @@ services:
     build:
       context: ./backend/company-events/
       dockerfile: Dockerfile
+      target: dev
     container_name: nest_backend
     ports:
       - "3000:3000"
