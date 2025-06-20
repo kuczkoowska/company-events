@@ -12,7 +12,7 @@ import {KeycloakAuthGuard} from "./keycloak-auth.guard";
             clientId: 'company-events-backend',
             secret: process.env.KEYCLOAK_SECRET || '',
             tokenValidation: TokenValidation.OFFLINE,
-            realmPublicKey: 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvAbD6XdFMzw0x8BX9tH18YwPN/yrTYiEH8zyfh2kqMqV0PZYldDHU5hI4Wrsa8MOoeXn3TO2zR2eQBaHlt9N3iTyBf2/KRMihEop2G+WHeUPpVEQDlt2C5FuBJx+F63EmRSSXYrk3Z3tLKno4gMOhKMXte6reVLeOsiAtX/K7+vpWCzi1DgPO+JvRAY8mk+8CSvUSbLEARiE5sFYwiKB/GCwiZPYtbVA4OKCE1E4g39rPgPzDc1qYP3qll+T0yg7jA/VaqtSAfRD3Y+m+OnHaQoH0HtVQIkpZONjlCufXroLU9a8+iyrQFqZ0Uyz/IAI2gOBU8YSMrScFDRxxL6aqQIDAQAB',
+            realmPublicKey: 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn9CYX2t5XFloEn/bos/m6nvdj2ZbriQH1bFLaz0y9qX7mGlTsPCZhZPBauRsY5tvQlymMJ6HnqYAMV69CuNX1giZwfqYk8kp/XfGwH+0CiBe8AIL2WFgbZhh2PtknaIzR30PkhqwkdViZ3CzuvScsdSLfWjiX5nxgvuXU1g+x49msPC0RWRRQO8psdyQdbh1AiIyPnw0hP8EkY2MwpbEcIg8yDCMZ1t8MJZajd1a/+g9GfamW2QO9PYhrwN3t0U9f2BSyAH1SkERWanKd5rqGLlmgihLcL9ilUG0OFlOVA/iemBfyL8JKorUEaCs834yktNI/gkky4J9k8eZ3aA3jQIDAQAB',
         }),
     ],
     providers: [
