@@ -21,12 +21,12 @@ spec:
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: keycloak-secrets
+                  name: app-keycloak-secrets
                   key: db-username
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: keycloak-secrets
+                  name: app-keycloak-secrets
                   key: db-password
             - name: POSTGRES_DB
               value: keycloak_db
