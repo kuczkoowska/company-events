@@ -42,7 +42,7 @@ metadata:
 spec:
   selector:
     app: frontend
-  type: LoadBalancer
   ports:
-    - port: 4200
+    - protocol: TCP
+      port: 4200
       targetPort: 4200

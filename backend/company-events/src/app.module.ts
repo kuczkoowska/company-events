@@ -22,7 +22,7 @@ console.log('ENV:', process.env);
             port: 5432,
             username: process.env.DB_USER || 'jagoda',
             password: process.env.DB_PASSWORD || 'jagoda',
-            database: 'events_kubernetes_db',
+            database: 'events_db',
             entities: [Event, Room],
             synchronize: true,
             logging: true,
