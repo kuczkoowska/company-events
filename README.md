@@ -59,12 +59,6 @@ cp .env.example .env
 docker-compose up -d
 ```
 
-The application will be available at:
-- Frontend: http://localhost:80
-- Keycloak: http://localhost:8080
-- Backend API: http://localhost:3000
-- Feedback API: http://localhost:3001
-
 ### Kubernetes Deployment
 
 For production environments, the application can be deployed to Kubernetes:
@@ -97,4 +91,12 @@ The application uses Keycloak for authentication and authorization:
 ### Environment Variables
 
 The application uses environment variables for configuration. See the `.env` file for details.
+
+## Pictures
+
+<img width="1263" alt="image" src="https://github.com/user-attachments/assets/ac5e4063-efd5-443e-8244-47b2a13ec2b4" />
+<img width="1292" alt="image" src="https://github.com/user-attachments/assets/8ec5d06a-2dee-4d48-9486-6e4428cd4481" />
+
+
+
 
